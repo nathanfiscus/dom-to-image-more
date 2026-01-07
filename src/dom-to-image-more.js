@@ -1159,7 +1159,7 @@
                 styleSheets.forEach(function (sheet) {
                     const sheetProto = Object.getPrototypeOf(sheet);
                     // NOSONAR
-                    if (Object.prototype.hasOwnProperty.call(sheetProto, 'cssRules')) {
+                    if (Object.prototype.hasOwnProperty.call(sheetProto, 'cssRules') && (sheetProto.ownerNode.href.indexOf(window.location.hostname) > -1 || sheetProto.ownerNode.href.startsWith("/") || sheetProto.ownerNode.crossOrigin === "anonymous")) {
                         try {
                             util.asArray(sheet.cssRules || []).forEach(
                                 cssRules.push.bind(cssRules)
